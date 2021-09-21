@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('site.category.index');
+        return view('site.category.index', [
+            'categories' => Category::all(),
+        ]);
     }
 
-    public function show($slug)
+    public function show(Category $category)
     {
-        return view("site.category.show", ['slug' => $slug]);
+        //dd($category->load('products'));
+        return view("site.category.show", ['category' => $category]);
     }
 
 
